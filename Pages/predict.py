@@ -11,17 +11,18 @@ def app():
             for col in df.columns:
                 if col != output:
                     st.number_input(col,min_value=min(df[col]),max_value=max(df[col]), key=col)
+
+
+            btn = st.button("predict")  
+            if btn: 
+                d = {}
+                for col in df.columns:
+                    if col != output:
+                        d[col] = [st.session_state.get(col)]
+
+                data = pd.DataFrame(d)
+                pred = best_model.predict(data)
+
+                st.success(f"Prediction : {pred[0]} ")
         else :
             st.write("Please upload your data in home page")
-
-        btn = st.button("predict")  
-        if btn: 
-            d = {}
-            for col in df.columns:
-                if col != output:
-                    d[col] = [st.session_state.get(col)]
-
-            data = pd.DataFrame(d)
-            pred = best_model.predict(data)
-
-            st.success(f"Prediction : {pred[0]} ")
