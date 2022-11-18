@@ -49,17 +49,12 @@ def app():
                 rforest_score =rforest.score(X_test, y_test)
                 rforest_recall_score = recall_score(y_test, rforest.predict(X_test))
 
-                xgbc = Pipeline([('scaler', StandardScaler()), ('clf', xgb.XGBClassifier())])
-                xgbc.fit(X_train, y_train)
-                xgbc_score =xgbc.score(X_test, y_test)
-                xgbc_recall_score = recall_score(y_test, xgbc.predict(X_test))
 
 
-
-                score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest","xgboost"],
-                                "Test size":[test_size,test_size,test_size,test_size,test_size],
-                                "Accurcy":[logreg_score,svc_score,dtree_score,rforest_score,xgbc_score],
-                                "Recall":[logreg_recall_score,svc_recall_score,dtree_recall_score,rforest_recall_score,xgbc_recall_score]}
+                score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest"],
+                                "Test size":[test_size,test_size,test_size,test_size],
+                                "Accurcy":[logreg_score,svc_score,dtree_score,rforest_score],
+                                "Recall":[logreg_recall_score,svc_recall_score,dtree_recall_score,rforest_recall_score]}
                 score = pd.DataFrame(score_dict)
                 st.dataframe(score)
                 best_model = score.sort_values(by=['Recall'], ascending=False).head(1)['Model'].values[0]
