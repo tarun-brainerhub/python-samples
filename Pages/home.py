@@ -24,3 +24,5 @@ def app():
         df = pd.read_csv(file)
         st.session_state["df"] = df
         st.session_state["df_added"] = True
+
+    st.markdown( '''### GitHub Repository: [KnowYourData](https://github.com/rishibrainerhub/knowyourdata)''')
