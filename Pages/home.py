@@ -17,7 +17,7 @@ def app():
 
 
     """)
-    st.warning("This app Supports only csv files, numerical data and classification models for now")
+    st.warning("This app Supports only csv files and numerical data for now")
     st.write("Enter your csv file here")
     file = st.file_uploader("Uplode here",type=["csv"])
     if file:
