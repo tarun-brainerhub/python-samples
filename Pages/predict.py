@@ -7,7 +7,7 @@ def app():
         df = st.session_state.get("df")
         output = st.session_state.get("output")
         if best_model == None:
-            st.write("MODEL IS NOT TRAINED YET PLEASE TRAIN THE MODEL")
+            st.warning("Model is not trained yet Please train your model first")
             return
         if df_addded == True:
             for col in df.columns:
@@ -27,4 +27,4 @@ def app():
 
                 st.success(f"Prediction : {pred[0]} ")
         else :
-            st.write("Please upload your data in home page")
+            st.warning("Please upload your data in home page")

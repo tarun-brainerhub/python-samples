@@ -26,4 +26,4 @@ def app():
             df.drop(features,axis =1, inplace=True)
             st.dataframe(df, width=1000, height=250)  
     else:
-        st.write("Please upload your data in home page")
+        st.warning("Please upload your data in home page")

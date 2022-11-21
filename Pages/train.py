@@ -116,4 +116,4 @@ def app():
                     except ValueError:
                         st.warning("we only support numerical data now")
         else:
-            st.write("Please upload your data in home page")
+            st.warning("Please upload your data in home page")

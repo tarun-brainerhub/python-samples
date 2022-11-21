@@ -25,6 +25,6 @@ def app():
             fig = px.violin(df, y=m, points='all',box=True)
             st.plotly_chart(fig)
         else:
-            st.write("Please upload your data in home page")
+            st.warning("Please upload your data in home page")
     except :
-        st.write("Please upload your data in home page")
+        st.warning("Please upload your data in home page")
