@@ -6,7 +6,9 @@ def app():
         best_model = st.session_state.get("best_model")
         df = st.session_state.get("df")
         output = st.session_state.get("output")
-
+        if best_model == None:
+            st.write("MODEL IS NOT TRAINED YET PLEASE TRAIN THE MODEL")
+            return
         if df_addded == True:
             for col in df.columns:
                 if col != output:
