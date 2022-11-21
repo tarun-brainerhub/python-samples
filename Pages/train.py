@@ -21,6 +21,7 @@ def app():
            
             btn  = st.button("Enter")
             if btn:
+                st.session_state["output"] = output
                 if len(df[output].value_counts()) == 2:
 
                     df = st.session_state.get("df")
