@@ -19,11 +19,12 @@ def app():
                 ph1.empty()
                 ph2.empty()
                 df.dropna(axis=0,inplace=True)
-        st.markdown("#### your data")
+        st.markdown("#### Your data")
         st.dataframe(df, width=1000, height=250)
-        features = st.multiselect("drop features", df.columns)
+        features = st.multiselect("Drop features", df.columns)
         if features:
             df.drop(features,axis =1, inplace=True)
+            st.markdown("#### New data")
             st.dataframe(df, width=1000, height=250)  
     else:
         st.warning("Please upload your data in home page")

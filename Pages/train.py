@@ -8,7 +8,7 @@ from sklearn.svm import SVC ,SVR
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import recall_score, r2_score,  mean_absolute_error
 import pandas as pd
-
+import xgboost as xgb
 def app():
         df_addded = st.session_state.get("df_added")
         df = st.session_state.get("df")
@@ -47,12 +47,18 @@ def app():
                             rforest.fit(X_train, y_train)
                             rforest_score =rforest.score(X_test, y_test)
                             rforest_recall_score = recall_score(y_test, rforest.predict(X_test))
-        
-                            score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest"],
-                                            "Test size":[test_size,test_size,test_size,test_size,],
-                                            "Accurcy":[logreg_score,svc_score,dtree_score,rforest_score],
-                                            "Recall":[logreg_recall_score,svc_recall_score,dtree_recall_score,rforest_recall_score]}
-                                            
+
+                            xg = xgb.XGBClassifier()
+                            xgbc = Pipeline([('scaler', StandardScaler()), ('clf', xg)])
+                            xgbc.fit(X_train, y_train)
+                            xgbc_score = xgbc.score(X_test, y_test)
+                            xgbc_recall_score =recall_score(y_test, xgbc.predict(X_test))
+
+                            score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest","XGBoost"],
+                                        "Test size":[test_size,test_size,test_size,test_size,test_size],
+                                        "Accurcy":[logreg_score,svc_score,dtree_score,rforest_score,xgbc_score],
+                                        "Recall":[logreg_recall_score,svc_recall_score,dtree_recall_score,rforest_recall_score,xgbc_recall_score]}  
+                            
                             score = pd.DataFrame(score_dict)
                             st.dataframe(score)
                             best_model = score.sort_values(by=['Recall'], ascending=False).head(1)['Model'].values[0]
@@ -97,10 +103,17 @@ def app():
                             rforest_r2_score = r2_score(y_test, rforest.predict(X_test))
                             rforest_mae = mean_absolute_error(y_test, rforest.predict(X_test))
 
-                            score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest"],
-                                            "Test size":[test_size,test_size,test_size,test_size,],
-                                            "r2 score":[logreg_r2_score,svr_r2_score,dtree_r2_score,rforest_r2_score],
-                                            "mean absolute error":[logreg_mae, svr_mae,dtree_mae,rforest_mae]}
+                            xg = xgb.XGBRegressor()
+                            xgbr = Pipeline([('scaler', StandardScaler()), ('clf', xg)])
+                            xgbr.fit(X_train, y_train)
+                            xgbr_r2_score = r2_score(y_test, xgbr.predict(X_test))
+                            xgbr_mae = mean_absolute_error(y_test, xgbr.predict(X_test))
+
+                            score_dict = {"Model": ["Logisticregression","SVC","DecisionTree","Randomforest", "XGBoost"],
+                                            "Test size":[test_size,test_size,test_size,test_size,test_size],
+                                            "r2 score":[logreg_r2_score,svr_r2_score,dtree_r2_score,rforest_r2_score, xgbr_r2_score],
+                                            "mean absolute error":[logreg_mae, svr_mae,dtree_mae,rforest_mae, xgbr_mae]}
+                                            
                             score = pd.DataFrame(score_dict)
                             st.dataframe(score)
                             best_model = score.sort_values(by=['r2 score'], ascending=False).head(1)['Model'].values[0]
