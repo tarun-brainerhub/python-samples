@@ -62,7 +62,7 @@ def app():
                             score = pd.DataFrame(score_dict)
                             st.dataframe(score)
                             best_model = score.sort_values(by=['Recall'], ascending=False).head(1)['Model'].values[0]
-                            st.success(f"best performin model is {best_model}")
+                            st.success(f"Best performing Model is {best_model}")
                             if best_model == "Logisticregression":
                                 st.session_state["best_model"] = logreg
                             if best_model == "SVC":
@@ -113,11 +113,11 @@ def app():
                                             "Test size":[test_size,test_size,test_size,test_size,test_size],
                                             "r2 score":[logreg_r2_score,svr_r2_score,dtree_r2_score,rforest_r2_score, xgbr_r2_score],
                                             "mean absolute error":[logreg_mae, svr_mae,dtree_mae,rforest_mae, xgbr_mae]}
-                                            
+
                             score = pd.DataFrame(score_dict)
                             st.dataframe(score)
                             best_model = score.sort_values(by=['r2 score'], ascending=False).head(1)['Model'].values[0]
-                            st.success(f"best performin model is {best_model}")
+                            st.success(f"Best performing Model is {best_model}")
                             if best_model == "Logisticregression":
                                 st.session_state["best_model"] = logreg
                             if best_model == "SVC":
