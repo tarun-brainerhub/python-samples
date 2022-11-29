@@ -71,6 +71,8 @@ def app():
                                 st.session_state["best_model"] = dtree
                             if best_model == "Randomforest":
                                 st.session_state["best_model"] = rforest
+                            if best_model == "XGBoost":
+                                st.session_state["best_model"] = xgbc
                     except ValueError:
                         st.warning("we only support numerical data now")
                 else:
@@ -126,6 +128,8 @@ def app():
                                 st.session_state["best_model"] = dtree
                             if best_model == "Randomforest":
                                 st.session_state["best_model"] = rforest                   
+                            if best_model == "XGBoost":
+                                st.session_state["best_model"] = xgbr                   
                     except ValueError:
                         st.warning("we only support numerical data now")
         else:
