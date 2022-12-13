@@ -25,4 +25,4 @@ def app():
         st.session_state["df"] = df
         st.session_state["df_added"] = True
 
-    st.markdown( '''### GitHub Repository: [KnowYourData](https://github.com/rishibrainerhub/knowyourdata)''')
+    st.markdown( '''### GitHub Repository: [KnowYourData](https://github.com/tarun-brainerhub/python-samples)''')
